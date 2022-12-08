@@ -61,3 +61,6 @@ img {
 .btn:hover {
   background-color: blanchedalmond;
 }
+.final-winner {
+  display: none;
+}

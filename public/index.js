@@ -1,18 +1,21 @@
 import { generatePlayers } from "./utils/generateCards.js";
 import { renderCards } from "./utils/renderCards.js";
 import { War } from "./modules/war.js";
-const players = generatePlayers("a", "b", "c", "d", "f");
+const players = generatePlayers("a", "b", "c", "d", "f", "g", "h");
 const game = new War(players);
 renderCards(players);
 const cardNodes = document.querySelectorAll(".card");
 const winners = document.querySelector(".winners");
+const main = document.querySelector(".main");
 const currentCards = document.querySelector(".current-cards");
 const startBtn = document.querySelector(".btn-start");
 const compareBtn = document.querySelector(".btn-compare");
+const finalWinnerNode = document.querySelector(".final-winner");
 game.renderStart(cardNodes, currentCards);
 let needCompare = false;
 let winnerForEachRound = [];
 startBtn.addEventListener("click", () => {
+    let finalWinner = game.isGameFinished();
     if (currentCards.innerText === "0") {
         game.getOneOrThreeCard(1);
         game.renderStart(cardNodes, currentCards);
@@ -32,6 +35,11 @@ startBtn.addEventListener("click", () => {
         winners.innerText = "";
         game.renderStart(cardNodes, currentCards);
         return;
+    }
+    if (finalWinner) {
+        finalWinnerNode.innerText = "Winner is: " + finalWinner[0].name;
+        finalWinnerNode.style.display = "block";
+        main.style.display = "none";
     }
     alert("please click compare button");
 });
