@@ -92,12 +92,19 @@ export class War {
       return false;
     }
   }
-  renderStart(nodes: NodeListOf<HTMLDivElement>) {
-    nodes.forEach((node, index) => {
+  renderStart(
+    cardNodes: NodeListOf<HTMLDivElement>,
+    currentCardsOnTable: HTMLSpanElement
+  ) {
+    cardNodes.forEach((node, index) => {
       node.querySelector(".cards-left")!.innerHTML =
         this.players[index].stack.length.toString();
       node.querySelector(".current-value")!.innerHTML =
         this.players[index].cardValue.toString();
     });
+    currentCardsOnTable.innerText = this.currentCards.length.toString();
+  }
+  renderCompare(winnerForEachRound: HTMLSpanElement) {
+    winnerForEachRound.innerText = this.winner.map((w) => w.name).toString();
   }
 }
