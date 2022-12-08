@@ -16,4 +16,3 @@ export const generatePlayers = function (...players) {
     }
     return generatedPlayers;
 };
-console.log(generatePlayers('a', 'b'));
